@@ -1,0 +1,526 @@
+{
+  "info": {
+    "_postman_id": "2abcd6ff-2b5d-4b00-a2f3-6667ec603854",
+    "name": "Sistema de Delivery - Flujo Completo",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "54547124",
+    "_collection_link": "https://go.postman.co/collection/54547124-2abcd6ff-2b5d-4b00-a2f3-6667ec603854?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Flujo Principal",
+      "item": [
+        {
+          "name": "1. Registrar Repartidor",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Carlos Lopez\",\n  \"telefono\": \"912345678\",\n  \"vehiculo\": \"moto\",\n  \"zona\": \"Valparaiso\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5000/repartidor/registrar",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "repartidor",
+                "registrar"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "2. Actualizar Disponibilidad",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"disponible\": true\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5000/repartidor/disponibilidad/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "repartidor",
+                "disponibilidad",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "3. Cliente Crea Pedido PED-001",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"pedido_id\": \"PED-001\",\n  \"tipo\": \"EXPRESS\",\n  \"categoria\": \"electronico\",\n  \"origen\": \"Valparaiso\",\n  \"destino\": \"Viña del Mar\",\n  \"cliente\": \"Ana Torres\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5000/cliente/pedidos",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "cliente",
+                "pedidos"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "5. Cliente Consulta Tracking PED-001",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/cliente/tracking/PED-001",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "cliente",
+                "tracking",
+                "PED-001"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "6. Sistema Asigna PED-001 Manualmente",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"courier_id\": 1\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5000/sistema/pedidos/PED-002/asignar",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "sistema",
+                "pedidos",
+                "PED-002",
+                "asignar"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "7. Repartidor Actualiza Ubicacion",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"latitud\": -33.0472,\n  \"longitud\": -71.6127,\n  \"timestamp\": \"2024-01-15T10:30:00\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5000/repartidor/ubicacion/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "repartidor",
+                "ubicacion",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "8. Repartidor Cambia Estado PED-001 a EN_RUTA",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"estado\": \"EN_RUTA\",\n  \"courier_id\": 1\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5000/repartidor/pedidos/PED-001/estado",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "repartidor",
+                "pedidos",
+                "PED-001",
+                "estado"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "9. Sistema Define Ruta RUTA-001",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ruta_id\": \"RUTA-001\",\n  \"courier_id\": 1,\n  \"pedidos\": [\"PED-001\", \"PED-002\"],\n  \"orden_entrega\": [\"PED-001\", \"PED-002\"]\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5000/sistema/rutas",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "sistema",
+                "rutas"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "10. Sistema Registra Seguimiento RUTA-001",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"evento\": \"INICIO_RUTA\",\n  \"latitud\": -33.0472,\n  \"longitud\": -71.6127,\n  \"timestamp\": \"2024-01-15T10:45:00\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5000/sistema/rutas/RUTA-001/seguimiento",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "sistema",
+                "rutas",
+                "RUTA-001",
+                "seguimiento"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "11. Repartidor Marca PED-001 como ENTREGADO",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"estado\": \"ENTREGADO\",\n  \"courier_id\": 1,\n  \"firma_cliente\": \"Ana Torres\",\n  \"timestamp\": \"2024-01-15T11:00:00\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5000/repartidor/pedidos/PED-001/estado",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "repartidor",
+                "pedidos",
+                "PED-001",
+                "estado"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "12. Repartidor Consulta Pedidos Pendientes",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/repartidor/pedidos?courier_id=1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "repartidor",
+                "pedidos"
+              ],
+              "query": [
+                {
+                  "key": "courier_id",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "13. Admin Consulta Todos los Pedidos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/admin/pedidos",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "admin",
+                "pedidos"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "14. Admin Consulta Historial de Eventos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/admin/eventos",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "admin",
+                "eventos"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Escenarios de Error",
+      "item": [
+        {
+          "name": "ERROR 1 - Cambiar Estado a CANCELADO (403)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"estado\": \"CANCELADO\",\n  \"courier_id\": 1\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5000/repartidor/pedidos/PED-001/estado",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "repartidor",
+                "pedidos",
+                "PED-001",
+                "estado"
+              ]
+            },
+            "description": "Esperado: 403 - No está permitido cancelar un pedido ya entregado"
+          },
+          "response": []
+        },
+        {
+          "name": "ERROR 2 - Asignar sin Repartidores Disponibles (409)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"disponible\": false\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5000/repartidor/disponibilidad/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "repartidor",
+                "disponibilidad",
+                "1"
+              ]
+            },
+            "description": "Paso 1: Deshabilitar repartidor. Luego ejecutar el siguiente request para provocar el 409"
+          },
+          "response": []
+        },
+        {
+          "name": "ERROR 2b - Asignar Pedido sin Disponibles (409)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"courier_id\": 1\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5000/sistema/pedidos/PED-002/asignar",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "sistema",
+                "pedidos",
+                "PED-002",
+                "asignar"
+              ]
+            },
+            "description": "Esperado: 409 - No hay repartidores disponibles"
+          },
+          "response": []
+        },
+        {
+          "name": "ERROR 3 - Tracking Pedido Inexistente (404)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/cliente/tracking/PED-999",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "cliente",
+                "tracking",
+                "PED-999"
+              ]
+            },
+            "description": "Esperado: 404 - Pedido no encontrado"
+          },
+          "response": []
+        },
+        {
+          "name": "ERROR 4 - Crear Pedido con Datos Invalidos (422)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"pedido_id\": \"\",\n  \"tipo\": \"\",\n  \"categoria\": \"\",\n  \"origen\": \"\",\n  \"destino\": \"\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5000/cliente/pedidos",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "cliente",
+                "pedidos"
+              ]
+            },
+            "description": "Esperado: 422 - Datos inválidos o campos vacíos"
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
